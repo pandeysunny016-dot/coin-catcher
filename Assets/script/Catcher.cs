@@ -3,16 +3,23 @@ using UnityEngine.InputSystem;
 
 public class Catcher : MonoBehaviour
 {
-    public float speed= 10f;
+    [Header("Movement")]
+    public float speed = 10f;
     public float limit = 7.5f;
 
     void Start()
     {
-        
+        // Make sure this GameObject has the "Catcher" tag
+        // so Coin.cs can detect the collision
+        gameObject.tag = "Catcher";
     }
 
     void Update()
     {
+        // Don't allow movement when game is over
+        if (GameManager.Instance != null && GameManager.Instance.isGameOver)
+            return;
+
         float input = 0f;
         if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed)
             input = -1f;
