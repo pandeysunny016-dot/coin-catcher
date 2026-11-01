@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         CoinSpawner spawner = FindFirstObjectByType<CoinSpawner>();
         if (spawner != null) spawner.enabled = false;
 
-        foreach (GameObject coin in GameObject.FindObjectsByType<Coin>(FindObjectsSortMode.None))
+        foreach (Coin coin in GameObject.FindObjectsByType<Coin>(FindObjectsSortMode.None))
             Destroy(coin.gameObject);
 
         if (gameOverPanel != null)
