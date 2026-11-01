@@ -35,7 +35,6 @@ public class CoinSpawner : MonoBehaviour
 
         // Build the coin entirely in code — no prefab needed
         GameObject coin = new GameObject("Coin");
-        coin.tag = "Coin";
         coin.transform.position = pos;
 
         // Yellow circle sprite

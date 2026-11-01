@@ -21,8 +21,8 @@ public class Coin : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Caught by the catcher
-        if (other.CompareTag("Catcher"))
+        // Detect catcher by component — no tag needed
+        if (other.GetComponent<Catcher>() != null)
         {
             if (GameManager.Instance != null)
                 GameManager.Instance.AddScore(scoreValue);

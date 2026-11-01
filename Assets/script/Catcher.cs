@@ -30,10 +30,7 @@ public class Catcher : MonoBehaviour
 
     void Start()
     {
-        // Register "Catcher" tag via code safely
-        // (tag must exist in TagManager — we set it only if already defined)
-        try { gameObject.tag = "Catcher"; }
-        catch { Debug.LogWarning("Please add 'Catcher' tag in Edit > Project Settings > Tags & Layers"); }
+        // No tag needed — Coin.cs detects collision via GetComponent<Catcher>()
     }
 
     void Update()
