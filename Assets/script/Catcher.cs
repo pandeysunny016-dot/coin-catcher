@@ -7,16 +7,37 @@ public class Catcher : MonoBehaviour
     public float speed = 10f;
     public float limit = 7.5f;
 
+    void Awake()
+    {
+        // Auto-add a BoxCollider2D if missing
+        if (GetComponent<BoxCollider2D>() == null)
+            gameObject.AddComponent<BoxCollider2D>();
+
+        // Auto-create GameManager if missing
+        if (GameManager.Instance == null)
+        {
+            GameObject gm = new GameObject("GameManager");
+            gm.AddComponent<GameManager>();
+        }
+
+        // Auto-create CoinSpawner if missing
+        if (FindFirstObjectByType<CoinSpawner>() == null)
+        {
+            GameObject spawner = new GameObject("CoinSpawner");
+            spawner.AddComponent<CoinSpawner>();
+        }
+    }
+
     void Start()
     {
-        // Make sure this GameObject has the "Catcher" tag
-        // so Coin.cs can detect the collision
-        gameObject.tag = "Catcher";
+        // Register "Catcher" tag via code safely
+        // (tag must exist in TagManager — we set it only if already defined)
+        try { gameObject.tag = "Catcher"; }
+        catch { Debug.LogWarning("Please add 'Catcher' tag in Edit > Project Settings > Tags & Layers"); }
     }
 
     void Update()
     {
-        // Don't allow movement when game is over
         if (GameManager.Instance != null && GameManager.Instance.isGameOver)
             return;
 
